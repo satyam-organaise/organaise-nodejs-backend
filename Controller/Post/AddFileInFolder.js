@@ -5,7 +5,7 @@ const AddFileInFolder = async (req, res) => {
     const folderId = req.body.folderId;
     const userId = req.body.userId;
     const fileId = req.body.fileId;
-    const selectFolder = await folderModel.find({ eq: { _id: folderId } });
+    const selectFolder = await folderModel.find({ _id: {$eq : folderId } });
    
     if (selectFolder.length > 0) {
         if (selectFolder[0].userId === userId) {
