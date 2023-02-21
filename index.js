@@ -4,8 +4,12 @@ import cors from "cors";
 import mongoose from "mongoose";
 // import multerS3 from "multer-s3";
 import Routes from "./Routes/userRoutes.js"
+import helmet  from 'helmet';
 const app = express();
 mongoose.set("strictQuery", true);
+app.use(helmet({
+  referrerPolicy: { policy: 'no-referrer-when-downgrade' }
+}));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 dotenv.config();
