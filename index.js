@@ -3,8 +3,13 @@ import dotenv from "dotenv";
 import cors from "cors";
 import mongoose from "mongoose";
 // import multerS3 from "multer-s3";
-import Routes from "./Routes/userRoutes.js"
-import helmet  from 'helmet';
+import Routes from "./Routes/userRoutes.js";
+import newUserRoutes from "./Routes/newUserRoutes.js";
+import chatRoutes from "./Routes/chatRoutes.js";
+import helmet from 'helmet';
+
+
+
 const app = express();
 mongoose.set("strictQuery", true);
 app.use(helmet({
@@ -27,6 +32,10 @@ mongoose.connection.on("disconnected", () => {
 });
 app.use(cors());
 app.use("/api/", Routes);
+app.use("/api/v1/user", newUserRoutes);
+app.use("/api/v1/chat", chatRoutes);
+
+
 app.listen(8000, () => {
   connect();
   console.log("Connected to backend");

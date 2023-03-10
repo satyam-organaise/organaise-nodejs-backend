@@ -13,7 +13,7 @@ const GetFolders = async (req, res) => {
         }
         if (d.length === 0) {
             return res.status(404).json({
-                message: "Data not found",
+                message: "Folder data not found",
                 status: false,
             })
         }

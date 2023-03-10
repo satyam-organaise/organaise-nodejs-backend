@@ -2,7 +2,7 @@ import dotenv from "dotenv";
 import AWS from "aws-sdk";
 import multer from "multer";
 import { v4 as uuid } from "uuid";
-import userModel from "../model/userModel.js";
+import userModel from "../model/fileModel.js";
 
 dotenv.config();
 const s3 = new AWS.S3({
@@ -12,7 +12,7 @@ const s3 = new AWS.S3({
 
 const fileUpload = async (req, res) => {
     const userid = req.body.userId;
-    const folderName = req?.body?.folderName ? req.body.folderName : "";
+    const fileSize = req.body.fileSize;
     const myFile = req.file.originalname.split(".")
     const fileType = myFile[myFile.length - 1]
     const params = {
@@ -33,7 +33,7 @@ const fileUpload = async (req, res) => {
                 userId: userid,
                 fileURL: data.Location,
                 fileName: req.file.originalname,
-                folderName: folderName,
+                fileSize: fileSize,
                 fileId: data.Key.split(".")[0]
             }
             const userData = new userModel(saveFileDataObj);
