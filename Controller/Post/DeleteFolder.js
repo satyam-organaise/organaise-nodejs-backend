@@ -5,7 +5,6 @@ import folderModel from "../../model/folderModel.js"
 const deletFolder = async (req, res) => {
     const folderId = req.body.folderId;
     const userId = req.body.userId;
-    console.log(req.body.folderId, req.body.userId);
     await folderModel.find({ userId: { $eq: userId } }).then((d) => {
         if (d.length > 0) {
 
