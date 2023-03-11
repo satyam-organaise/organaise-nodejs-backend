@@ -8,6 +8,7 @@ import GetFolders from "../Controller/Post/GetFolders.js";
 import deletFolder from "../Controller/Post/DeleteFolder.js";
 import createCompany from "../Controller/Post/CreateCompany.js";
 import getCompany from "../Controller/Get/getCompany.js";
+import removeFileFromFolder from "../Controller/Post/RemoveFileFromFolder.js";
 
 const router = express.Router();
 
@@ -25,5 +26,6 @@ router.post("/addFileInFolder", AddFileInFolder);
 router.post("/getFolders", GetFolders);
 router.delete("/deleteFolder", deletFolder);
 router.route("/createCompany").post(createCompany).get(getCompany);
+router.post("/removeFile",removeFileFromFolder)
 
 export default router;
