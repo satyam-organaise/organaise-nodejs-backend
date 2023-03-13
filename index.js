@@ -7,6 +7,7 @@ import Routes from "./Routes/userRoutes.js";
 import newUserRoutes from "./Routes/newUserRoutes.js";
 import chatRoutes from "./Routes/chatRoutes.js";
 import helmet from 'helmet';
+import bodyParser from 'body-parser';
 
 
 
@@ -15,8 +16,14 @@ mongoose.set("strictQuery", true);
 app.use(helmet({
   referrerPolicy: { policy: 'no-referrer-when-downgrade' }
 }));
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+//app.use(express.json());
+//app.use(express.urlencoded({ extended: true }));
+
+
+app.use(bodyParser.json({ limit: '50mb' }));
+app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
+
+
 dotenv.config();
 const connect = async () => {
   try {
