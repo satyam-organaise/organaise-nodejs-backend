@@ -6,6 +6,7 @@ import mongoose from "mongoose";
 import Routes from "./Routes/userRoutes.js";
 import newUserRoutes from "./Routes/newUserRoutes.js";
 import chatRoutes from "./Routes/chatRoutes.js";
+import messageRoutes from "./Routes/messageRoutes.js";
 import helmet from 'helmet';
 import bodyParser from 'body-parser';
 
@@ -41,6 +42,7 @@ app.use(cors());
 app.use("/api/", Routes);
 app.use("/api/v1/user", newUserRoutes);
 app.use("/api/v1/chat", chatRoutes);
+app.use("/api/v1/message", messageRoutes);
 
 
 app.listen(8000, () => {
