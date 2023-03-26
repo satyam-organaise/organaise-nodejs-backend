@@ -3,8 +3,10 @@ import User from "../model/userModel.js";
 import generateToken from "../utils/generateToken.js";
 
 
-export const registerUser = asyncHandler(async (req, res) => {
 
+////// Create the account 
+
+export const registerUser = asyncHandler(async (req, res) => {
     const { name, email, password, pic } = req.body;
     if (!name || !email || !password) {
         res.status(400);
@@ -28,7 +30,8 @@ export const registerUser = asyncHandler(async (req, res) => {
             name: user.name,
             email: user.email,
             pic: user.pic,
-            token: generateToken(user._id)
+            token: generateToken(user._id),
+            status: true,
         });
 
     } else {
@@ -39,16 +42,19 @@ export const registerUser = asyncHandler(async (req, res) => {
 })
 
 
+//////// Login the user
 export const authUser = asyncHandler(async (req, res) => {
     const { email, password } = req.body;
     const user = await User.findOne({ email });
-
     if (user && (await user.matchPassword(password))) {
         res.json({
             _id: user._id,
             name: user.name,
             email: user.email,
-            pic: user.pic
+            pic: user.pic,
+            isAdmin: user.isAdmin,
+            status: true,
+            token: generateToken(user._id),
         })
     } else {
         res.status(401);
@@ -57,6 +63,7 @@ export const authUser = asyncHandler(async (req, res) => {
 })
 
 
+/////// Searching the user
 export const allUsers = asyncHandler(async (req, res) => {
     const keyword = req.query.search ? {
         $or: [

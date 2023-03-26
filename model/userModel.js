@@ -9,15 +9,16 @@ const userSchema = mongoose.Schema({
 }, { timestamps: true })
 
 
+/////////Here we are match the password
 userSchema.methods.matchPassword = async function (enteredPassword) {
     return await bcrypt.compare(enteredPassword, this.password)
 }
 
-
+//////before saving the data password chnnge in hash , This is working as a middlewear
 userSchema.pre('save', async function (next) {
-    if (!this.modified) { next() }
+    if (!this.isModified) { next() }
     const salt = await bcrypt.genSalt(10);
-    this.password = await bcrypt.hash(this.password, salt)
+    this.password = await bcrypt.hash(this.password, salt);
 })
 
 
@@ -26,4 +27,3 @@ userSchema.pre('save', async function (next) {
 const User = mongoose.model("User", userSchema);
 
 export default User;
-// module.exports = User;

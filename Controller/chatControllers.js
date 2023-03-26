@@ -69,13 +69,13 @@ export const fetchChats = asyncHandler(async (req, res) => {
 })
 
 export const createGroupChat = asyncHandler(async (req, res) => {
-    if (!req.body.user || !req.body.name) {
+    if (!req.body.users || !req.body.name) {
         return res.status(400).send({ messaage: "Please Fill all the feilds" })
     }
 
     var users = JSON.parse(req.body.users);
 
-    if (users.length < 2) {
+    if (users.length < 1) {
         return res.status(400).send("More than 2 Users are required to form a group chat");
     }
 
