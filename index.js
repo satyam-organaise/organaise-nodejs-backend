@@ -14,7 +14,6 @@ import { Server } from 'socket.io';
 
 const app = express();
 mongoose.set("strictQuery", true);
-app.use(cors());
 app.use(helmet({
   referrerPolicy: { policy: 'no-referrer-when-downgrade' }
 }));
