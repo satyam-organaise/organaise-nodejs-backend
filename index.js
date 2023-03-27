@@ -55,7 +55,8 @@ const expressServer = app.listen(8000, () => {
 const io = new Server(expressServer, {
   pingTimeout: 60000,
   cors: {
-    origin:"http://localhost:3000", 
+    origin: "https://devorganaise.com"
+    //"http://localhost:3000", 
     //"https://socket-io-implement.d1ejzafqf0pe4f.amplifyapp.com"
     //
   }
