@@ -55,8 +55,9 @@ const expressServer = app.listen(8000, () => {
 const io = new Server(expressServer, {
   pingTimeout: 60000,
   cors: {
-    origin: "https://devorganaise.com"
-    //"http://localhost:3000", 
+    origin:"https://devorganaise.com", 
+    // 
+    //"http://localhost:3000"
     //"https://socket-io-implement.d1ejzafqf0pe4f.amplifyapp.com"
     //
   }
@@ -87,6 +88,7 @@ io.on("connection", (socket) => {
     if (!chat.users) return console.log("chat.user not defined");
     chat.users.forEach(user => {
       if (user._id === newMessageRecived.sender._id) return;
+
       socket.in(user._id).emit("message recived", newMessageRecived);
     });
   })
