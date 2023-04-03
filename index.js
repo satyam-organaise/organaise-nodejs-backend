@@ -25,6 +25,7 @@ app.use(bodyParser.json({ limit: '50mb' }));
 app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
 
 
+
 dotenv.config();
 const connect = async () => {
   try {
@@ -52,14 +53,13 @@ const expressServer = app.listen(8000, () => {
 
 
 
+
 const io = new Server(expressServer, {
   pingTimeout: 60000,
   cors: {
-    origin:"https://devorganaise.com", 
-    // 
-    //"http://localhost:3000"
-    //"https://socket-io-implement.d1ejzafqf0pe4f.amplifyapp.com"
-    //
+    origin: ["https://devorganaise.com"],
+    path: "/" + "socketio"
+    //process.env.NODE_ENV === 'production' ? process.env.PRDO_URL : process.env.DEV_URL
   }
 })
 
