@@ -57,7 +57,7 @@ const expressServer = app.listen(8000, () => {
 const io = new Server(expressServer, {
   pingTimeout: 60000,
   cors: {
-    origin: ["https://app.organaise.com"],
+    origin: [process.env.PRDO_URL],
     path: "/" + "socketio"
     //process.env.NODE_ENV === 'production' ? process.env.PRDO_URL : process.env.DEV_URL
   }
